@@ -37,10 +37,19 @@ function addListeners() {
             animaster().showAndHide(block, 3000);
         });
 
+    let heartBeating;
+
     document.getElementById('heartBeatingPlay')
         .addEventListener('click', function () {
             const block = document.getElementById('heartBeatingBlock');
-            animaster().heartBeating(block);
+            heartBeating = animaster().heartBeating(block);
+        });
+
+    document.getElementById('heartBeatingStop')
+        .addEventListener('click', function () {
+            if (heartBeating !== undefined) {
+                heartBeating.stop();
+            }
         });
 }
 
@@ -74,8 +83,15 @@ function animaster() {
         },
         heartBeating: function (element) {
             this.scale(element, 500, 1.4);
-            setInterval(() => this.scale(element, 500, 1), 500);
-            setInterval(() => this.scale(element, 500, 1.4), 1000);
+            const scaleToBigInt = setInterval(() => this.scale(element, 500, 1), 500);
+            const scaleToOneInt = setInterval(() => this.scale(element, 500, 1.4), 1000);
+
+            return {
+                stop: function () {
+                    clearInterval(scaleToBigInt);
+                    clearInterval(scaleToOneInt);
+                }
+            };
         }
     }
 }
