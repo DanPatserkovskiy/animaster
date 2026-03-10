@@ -27,7 +27,7 @@ function addListeners() {
 
     document.getElementById('moveAndHidePlay')
         .addEventListener('click', function () {
-            const block = document.getElementById('moveAndHidescaleBlock');
+            const block = document.getElementById('moveAndHideBlock');
             animaster().moveAndHide(block, 2000, {x: 100, y: 20});
         });
 
@@ -66,7 +66,7 @@ function animaster() {
         },
         moveAndHide: function (element, duration, translation) {
             animaster().move(element, duration * 0.4, translation);
-            animaster().fadeOut(element, duration * 0.6);
+            setTimeout(() => animaster().fadeOut(element, duration * 0.6), duration * 0.4);
         },
         showAndHide: function (element, duration) {
             animaster().fadeIn(element, duration / 3);
