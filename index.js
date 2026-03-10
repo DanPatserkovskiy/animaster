@@ -25,10 +25,19 @@ function addListeners() {
             animaster().scale(block, 1000, 1.25);
         });
 
+    let moveAndHideObj;
+
     document.getElementById('moveAndHidePlay')
         .addEventListener('click', function () {
             const block = document.getElementById('moveAndHideBlock');
-            animaster().moveAndHide(block, 2000, {x: 100, y: 20});
+            moveAndHideObj = animaster().moveAndHide(block, 2000, {x: 100, y: 20});
+        });
+
+    document.getElementById('moveAndHideReset')
+        .addEventListener('click', function () {
+            if (moveAndHideObj !== undefined) {
+                moveAndHideObj.reset();
+            }
         });
 
     document.getElementById('showAndHidePlay')
@@ -37,24 +46,23 @@ function addListeners() {
             animaster().showAndHide(block, 3000);
         });
 
-    let heartBeating;
+    let heartBeatingObj;
 
     document.getElementById('heartBeatingPlay')
         .addEventListener('click', function () {
             const block = document.getElementById('heartBeatingBlock');
-            heartBeating = animaster().heartBeating(block);
+            heartBeatingObj = animaster().heartBeating(block);
         });
 
     document.getElementById('heartBeatingStop')
         .addEventListener('click', function () {
-            if (heartBeating !== undefined) {
-                heartBeating.stop();
+            if (heartBeatingObj !== undefined) {
+                heartBeatingObj.stop();
             }
         });
 }
 
 function animaster() {
-    
     function resetFadeIn(element) {
         element.style.transitionDuration = null;
         element.classList.remove('show');
@@ -93,7 +101,15 @@ function animaster() {
         },
         moveAndHide: function (element, duration, translation) {
             animaster().move(element, duration * 0.4, translation);
-            setTimeout(() => animaster().fadeOut(element, duration * 0.6), duration * 0.4);
+            const timeOut = setTimeout(() => animaster().fadeOut(element, duration * 0.6), duration * 0.4);
+
+            return {
+                reset: function () {
+                    clearTimeout(timeOut);
+                    resetFadeOut(element);
+                    resetMoveAndScale(element);
+                }
+            }
         },
         showAndHide: function (element, duration) {
             animaster().fadeIn(element, duration / 3);
