@@ -35,6 +35,7 @@ function addListeners() {
         .addEventListener('click', function () {
             const block = document.getElementById('showAndHideBlock');
             animaster().showAndHide(block, 3000);
+        });
 
     document.getElementById('heartBeatingPlay')
         .addEventListener('click', function () {
@@ -43,33 +44,33 @@ function addListeners() {
         });
 }
 
-function animaster(){
+function animaster() {
     return {
-        fadeIn: function(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
+        fadeIn: function (element, duration) {
+            element.style.transitionDuration = `${duration}ms`;
             element.classList.remove('hide');
             element.classList.add('show');
         },
-        move: function(element, duration, translation) {
+        move: function (element, duration, translation) {
             element.style.transitionDuration = `${duration}ms`;
             element.style.transform = getTransform(translation, null);
         },
-        scale: function(element, duration, ratio) {
-            element.style.transitionDuration =  `${duration}ms`;
+        scale: function (element, duration, ratio) {
+            element.style.transitionDuration = `${duration}ms`;
             element.style.transform = getTransform(null, ratio);
         },
-        fadeOut: function(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
+        fadeOut: function (element, duration) {
+            element.style.transitionDuration = `${duration}ms`;
             element.classList.remove('show');
             element.classList.add('hide');
         },
-        moveAndHide: function(element, duration, translation){
-            animaster().move(element, duration*0.4, translation);
-            animaster().fadeOut(element, duration*0.6);
+        moveAndHide: function (element, duration, translation) {
+            animaster().move(element, duration * 0.4, translation);
+            animaster().fadeOut(element, duration * 0.6);
         },
-        showAndHide: function(element, duration){
-            animaster().fadeIn(element, duration/3);
-            setTimeout(() => animaster().fadeOut(element, duration/3), duration/3);
+        showAndHide: function (element, duration) {
+            animaster().fadeIn(element, duration / 3);
+            setTimeout(() => animaster().fadeOut(element, duration / 3), duration / 3);
         },
         heartBeating: function (element) {
             this.scale(element, 500, 1.4);
@@ -78,6 +79,7 @@ function animaster(){
         }
     }
 }
+
 /**
  * Блок плавно появляется из прозрачного.
  * @param element — HTMLElement, который надо анимировать
