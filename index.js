@@ -30,10 +30,11 @@ function addListeners() {
             const block = document.getElementById('moveAndHidescaleBlock');
             animaster().moveAndHide(block, 2000, {x: 100, y: 20});
         });
+
     document.getElementById('showAndHidePlay')
         .addEventListener('click', function () {
             const block = document.getElementById('showAndHideBlock');
-            animaster().moveAndHide(block, 3000);
+            animaster().showAndHide(block, 3000);
 
     document.getElementById('heartBeatingPlay')
         .addEventListener('click', function () {
@@ -69,6 +70,7 @@ function animaster(){
         showAndHide: function(element, duration){
             animaster().fadeIn(element, duration/3);
             setTimeout(() => animaster().fadeOut(element, duration/3), duration/3);
+        },
         heartBeating: function (element) {
             this.scale(element, 500, 1.4);
             setInterval(() => this.scale(element, 500, 1), 500);
