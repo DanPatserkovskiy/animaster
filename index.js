@@ -127,8 +127,41 @@ function animaster() {
                 }
             };
         },
-        addMove(){
-            return
+        addMove(duration, translation){
+            this._steps.push({
+                name: 'move',
+                duration,
+                translation,
+                ratio: 1.0,
+            })
+            return this;
+        },
+        addScale(duration, ratio){
+            this._steps.push({
+                name: 'scale',
+                duration,
+                translation: undefined,
+                ratio,
+            })
+            return this;
+        },
+        addFadeIn(duration){
+            this._steps.push({
+                name: 'fadeIn',
+                duration,
+                translation: undefined,
+                ratio: 1.0
+            })
+            return this;
+        },
+        addFadeOut(duration){
+            this._steps.push({
+                name: 'fadeOut',
+                duration,
+                translation: undefined,
+                ratio: 1.0
+            })
+            return this;
         },
         play(element){
             return this;
