@@ -10,7 +10,7 @@ function addListeners() {
     document.getElementById('fadeOutPlay')
         .addEventListener('click', function () {
             const block = document.getElementById('fadeOutBlock');
-            fadeOut(block, 5000);
+            animaster().fadeOut(block, 5000);
         });
 
     document.getElementById('movePlay')
@@ -40,6 +40,11 @@ function animaster(){
         scale: function(element, duration, ratio) {
             element.style.transitionDuration =  `${duration}ms`;
             element.style.transform = getTransform(null, ratio);
+        },
+        fadeOut: function(element, duration) {
+            element.style.transitionDuration =  `${duration}ms`;
+            element.classList.remove('show');
+            element.classList.add('hide');
         }
     }
 }
@@ -53,12 +58,6 @@ function animaster(){
     element.classList.remove('hide');
     element.classList.add('show');
 }**/
-
-function fadeOut(element, duration) {
-    element.style.transitionDuration =  `${duration}ms`;
-    element.classList.remove('show');
-    element.classList.add('hide');
-}
 
 /**
  * Функция, передвигающая элемент
