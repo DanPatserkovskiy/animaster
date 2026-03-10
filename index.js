@@ -164,7 +164,20 @@ function animaster() {
             return this;
         },
         play(element){
-            return this;
+            for (let i; i < this._steps.length; i++){
+                if (this._steps[i].name === 'move'){
+                    this.move(element, this._steps[i].duration, this._steps[i].translation)
+                }
+                if (this._steps[i].name === 'scale'){
+                    this.scale(element, this._steps[i].duration, this._steps[i].ratio)
+                }
+                if (this._steps[i].name === 'fadeIn'){
+                    this.fadeIn(element, this._steps[i].duration)
+                }
+                if (this._steps[i].name === 'fadeOut'){
+                    this.fadeOut(element, this._steps[i].duration)
+                }
+            }
         }
     }
 }
